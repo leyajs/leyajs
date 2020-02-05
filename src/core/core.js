@@ -55,7 +55,6 @@ export default class Core {
             //if it's still open
             if (this.session.finish === null) {
                 LOGGER.debug("Ending session " + this.session.id);
-                this.session.finish = new Date().getTime();
 
                 //record session
                 Leya.Events.recordSession();

@@ -137,12 +137,13 @@ export default class Prebid {
             rows.push({
                 session: bat.session,
                 host: bat.host,
+                referrer: bat.referrer,
                 path: bat.path,
                 device: bat.device,
                 gdprc: bat.gdprc,
                 tags: bat.tags,
 
-                ad_unit: bat.ad_unit,
+                ad_unit_id: bat.ad_unit,
                 bat_cpm: bat.cpm,
                 bat_bidder: bat.bidder,
                 bat_start: bat.bidder_start,
@@ -174,12 +175,13 @@ export default class Prebid {
             rows.push({
                 session: i.session,
                 host: i.host,
+                referrer: i.referrer,
                 path: i.path,
                 device: i.device,
                 gdprc: i.gdprc,
                 tags: i.tags,
 
-                ad_unit: i.ad_unit,
+                ad_unit_id: i.ad_unit,
                 winner_cpm: i.cpm,
                 winner_bidder: i.winner,
                 media_type: i.media_type,
@@ -210,6 +212,7 @@ export default class Prebid {
                 rows.push({
                     session: a.session,
                     host: a.host,
+                    referrer: a.referrer,
                     path: a.path,
                     device: a.device,
                     gdprc: a.gdprc,
