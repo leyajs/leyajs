@@ -23,7 +23,7 @@ export class LeyaClient {
     async sendEvent(event) {
         this.events.push(event);
 
-        if(this.events.length > this.batchSize) {
+        if (this.events.length > this.batchSize) {
             await this.flush();
         }
     }
@@ -35,18 +35,13 @@ export class LeyaClient {
     async flush() {
         let k = await Leya.getKey();
 
-        const headers = {
-            'Content-Type': 'application/json',
-            'x-api-token': k
-        };
-
         if (this.flushTimeoutId) {
             clearTimeout(this.flushTimeoutId);
             this.flushTimeoutId = null;
         }
 
         try {
-            if(k) {
+            if (k) {
                 while (this.events.length) {
                     let d = this.events.splice(0, this.batchSize);
 
@@ -62,7 +57,22 @@ export class LeyaClient {
 
                         LOGGER.info(JSON.stringify(payload));
 
-                        return await Axios.post(DEFAULT_HOST, JSON.stringify(payload), {headers: headers});
+                        if (navigator.sendBeacon) {
+                            //if beacon exists, use it
+                            let blob = new Blob([JSON.stringify(payload)], {type: 'application/json'});
+                            navigator.sendBeacon(DEFAULT_HOST + '?xat=' + k, blob);
+                        }
+                        else {
+                            //fallback to axios
+                            //https://caniuse.com/#search=sendBeacon
+                            //in this case it's highly likely that there will be no session events
+                            return await Axios.post(DEFAULT_HOST, JSON.stringify(payload), {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'x-api-token': k
+                                }
+                            });
+                        }
                     }
                 }
             }
