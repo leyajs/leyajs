@@ -10,7 +10,10 @@ window.addEventListener('DOMContentLoaded', async (event) => {
     await Leya.Events.recordPageView();
 });
 
-window.addEventListener('beforeunload', async () => {
+window.addEventListener('beforeunload', async (event) => {
     //attempt to close session
     await Leya.finishSession();
+
+    delete event['returnValue'];
+
 });
