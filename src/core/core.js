@@ -56,8 +56,10 @@ export default class Core {
             if (this.session.finish === null) {
                 LOGGER.debug("Ending session " + this.session.id);
 
+                this.session.finish = new Date().getTime();
+
                 //record session
-                Leya.Events.recordSession();
+                return Leya.Events.recordSession();
             } else {
                 LOGGER.warn("Session already closed at " + this.session.finish);
             }
@@ -65,8 +67,6 @@ export default class Core {
             LOGGER.error("No session, start one first");
             throw new NoSessionError();
         }
-
-        return this.getSession();
     }
 
     async setTags(tags) {

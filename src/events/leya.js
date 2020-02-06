@@ -69,7 +69,7 @@ export default class LeyaEvents {
             path: s.path,
             referrer: s.referrer,
             session_start: s.start,
-            session_finish: new Date().getTime(),
+            session_finish: s.finish,
             device: u.device,
             blan: u.browserLanguage,
             gdprc: u.gdpr.consented,
