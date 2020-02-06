@@ -32,6 +32,7 @@ export default class Prebid {
             a.referrer = s.referrer;
             a.device = u.device;
             a.gdprc = a.gdprc || u.gdpr.consented;
+            a.gdprvl = u.gdpr.vendorListVersion;
             a.tags = this.sanitizeTags(tags);
 
             LOGGER.debug("Flattening auction event: " + JSON.stringify(a));
@@ -70,6 +71,7 @@ export default class Prebid {
             i.referrer = s.referrer;
             i.device = u.device;
             i.gdprc = i.gdprc || u.gdpr.consented;
+            i.gdprvl = u.gdpr.vendorListVersion;
             i.tags = this.sanitizeTags(tags);
 
             LOGGER.debug("Flattening impression event: " + JSON.stringify(i));
@@ -108,6 +110,7 @@ export default class Prebid {
             bat.referrer = s.referrer;
             bat.device = u.device;
             bat.gdprc = bat.gdprc || u.gdpr.consented;
+            bat.gdprvl = u.gdpr.vendorListVersion;
             bat.tags = this.sanitizeTags(tags);
 
             LOGGER.debug("Flattening BidAfterTimeout event: " + JSON.stringify(bat));
@@ -141,6 +144,8 @@ export default class Prebid {
                 path: bat.path,
                 device: bat.device,
                 gdprc: bat.gdprc,
+                gdprvl: bat.gdprvl,
+
                 tags: bat.tags,
 
                 ad_unit_id: bat.ad_unit,
@@ -179,6 +184,8 @@ export default class Prebid {
                 path: i.path,
                 device: i.device,
                 gdprc: i.gdprc,
+                gdprvl: i.gdprvl,
+
                 tags: i.tags,
 
                 ad_unit_id: i.ad_unit,
@@ -216,6 +223,8 @@ export default class Prebid {
                     path: a.path,
                     device: a.device,
                     gdprc: a.gdprc,
+                    gdprvl: a.gdprvl,
+
                     tags: a.tags,
 
                     auction_id: a.id,
