@@ -29,7 +29,7 @@ export default class LeyaEvents {
                 blan: u.browserLanguage,
                 gdprc: u.gdpr.consented,
                 gdprvl: u.gdpr.vendorListVersion,
-                tags: Leya.getTags()
+                tags: await Leya.getTags()
             };
 
             let data = {
@@ -74,7 +74,7 @@ export default class LeyaEvents {
             blan: u.browserLanguage,
             gdprc: u.gdpr.consented,
             gdprvl: u.gdpr.vendorListVersion,
-            tags: Leya.getTags()
+            tags: await Leya.getTags()
         };
 
         let data = {
