@@ -59,7 +59,7 @@ export class LeyaClient {
 
                         if (navigator.sendBeacon) {
                             //if beacon exists, use it
-                            let blob = new Blob([JSON.stringify(payload)], {type: 'application/json'});
+                            let blob = new Blob([JSON.stringify(payload)], {type: 'text/plain; charset=UTF-8'});
                             navigator.sendBeacon(DEFAULT_HOST + '?xat=' + k, blob);
                         }
                         else {
