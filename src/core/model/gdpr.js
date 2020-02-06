@@ -1,6 +1,6 @@
 export class Gdpr {
-    _consented = 0;
-    _vendorListVersion = -1;
+    _consented = 3;
+    _vendorListVersion;
 
     get consented() {
         return this._consented;
