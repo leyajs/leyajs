@@ -1,11 +1,11 @@
 //default config
 
-document.addEventListener('DOMContentLoaded', async (event) => {
+document.addEventListener('load', async (event) => {
     //start session
     await Leya.startSession();
 });
 
-window.addEventListener('DOMContentLoaded', async (event) => {
+window.addEventListener('load', async (event) => {
     //record page view
     await Leya.Events.recordPageView();
 });
