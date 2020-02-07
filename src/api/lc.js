@@ -55,7 +55,7 @@ export class LeyaClient {
                             payload[e.type] = payload[e.type].concat(e.data);
                         });
 
-                        LOGGER.info(JSON.stringify(payload));
+                        LOGGER.debug(JSON.stringify(payload));
 
                         if (navigator.sendBeacon) {
                             //if beacon exists, use it
