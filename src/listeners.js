@@ -1,6 +1,6 @@
 //default config
 
-document.addEventListener('load', async (event) => {
+document.addEventListener('DOMContentLoaded', async (event) => {
     //start session
     await Leya.startSession();
 });
