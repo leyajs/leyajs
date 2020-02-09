@@ -5,7 +5,7 @@ import {LOGGER} from "../core/utils";
 
 (function (window) {
     const fint = 1000; //flush interval
-    const bs = 3; //batch size
+    const bs = 1; //batch size
 
     let lc = new LeyaClient(fint, bs);
     let p = new Prebid(lc);
