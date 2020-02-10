@@ -205,7 +205,7 @@ export class BidAfterTimeout {
         bat.gdprc = bidAfterTimeout.auction.gdpr_consent;
         bat.status = bidAfterTimeout.auction.status;
         bat.auction_start = bidAfterTimeout.auction.start;
-        bat.auction_finish = bidAfterTimeout.auction.end;
+        bat.auction_finish = bidAfterTimeout.auction.finish;
         bat.timeout = bidAfterTimeout.auction.timeout;
 
         let bidders = [];
