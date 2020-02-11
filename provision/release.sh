@@ -3,7 +3,7 @@
 echo "Releasing version $1"
 
 git checkout --detach
-npm run build
+npm install && npm run build
 git add dist/main.js dist/main.nomin.js --force
 git commit -m $1
 git tag $1
