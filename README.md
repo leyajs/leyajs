@@ -6,6 +6,8 @@
 <script src="https://cdn.jsdelivr.net/gh/leyajs/leyajs/dist/main.js"></script>
 ```
 
+##### Once loaded, you can access the following methods from anywhere
+
 * **Adding your ingestion key**
 
 ```javascript
