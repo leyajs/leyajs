@@ -23,7 +23,7 @@ await Leya.getKey();
 * **Adding key-value entries**
 
 ```javascript
-await Leya.setTags(["key1", "value1", "keya2", "value2"]);
+await Leya.setTags(["key1", "value1", "key2", "value2"]);
 
 //array needs to have an even number of elements (key, value) 
 ```
