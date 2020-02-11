@@ -25,7 +25,17 @@ await Leya.getKey();
 ```javascript
 await Leya.setTags(["key1", "value1", "key2", "value2"]);
 
-//array needs to have an even number of elements (key, value) 
+//array needs to have an even number of elements (key, value)
+
+```
+
+For example, we could add new tags on load event
+ 
+```javascript
+document.addEventListener('load', async (event) => {
+    //add new tags 
+    await Leya.setTags(["key1", "value1", "key2", "value2"].concat(await Leya.getTags()));
+});
 ```
 
 * **Getting key-value entries**
