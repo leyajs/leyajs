@@ -3,7 +3,7 @@
 * **Adding `leya.js` to your page:**
 
 ```html
-<script>https://cdn.jsdelivr.net/gh/leyajs/leyajs/dist/main.js</script>
+<script src="https://cdn.jsdelivr.net/gh/leyajs/leyajs/dist/main.js"></script>
 ```
 
 * **Adding your ingestion key**
