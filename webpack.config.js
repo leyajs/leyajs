@@ -2,12 +2,14 @@ const webpack = require('webpack');
 const path = require('path');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
+
 
 const config = {
     entry: ['babel-polyfill', './src/core/main.js', './src/events/main.js', './src/listeners.js'],
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[contenthash].js'
+        path: path.join(__dirname, '/dist'),
+        filename: '[name].js'
     },
     module: {
         rules: [
@@ -25,7 +27,8 @@ const config = {
             template: require('html-webpack-template'),
             inject: false,
             appMountId: 'app',
-        })
+        }),
+        new UnminifiedWebpackPlugin()
     ],
     /*optimization: {
         runtimeChunk: 'single',
