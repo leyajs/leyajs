@@ -31,7 +31,7 @@ export default class Prebid {
             a.path = s.path;
             a.referrer = s.referrer;
             a.device = u.device;
-            a.gdprc = a.gdprc || u.gdpr.consented;
+            a.gdprc = u.gdpr.consented || a.gdprc ;
             a.gdprvl = u.gdpr.vendorListVersion;
             a.tags = this.sanitizeTags(tags);
 
@@ -70,7 +70,7 @@ export default class Prebid {
             i.path = s.path;
             i.referrer = s.referrer;
             i.device = u.device;
-            i.gdprc = i.gdprc || u.gdpr.consented;
+            i.gdprc = u.gdpr.consented || i.gdprc ;
             i.gdprvl = u.gdpr.vendorListVersion;
             i.tags = this.sanitizeTags(tags);
 
@@ -109,7 +109,7 @@ export default class Prebid {
             bat.path = s.path;
             bat.referrer = s.referrer;
             bat.device = u.device;
-            bat.gdprc = bat.gdprc || u.gdpr.consented;
+            bat.gdprc = u.gdpr.consented || bat.gdprc;
             bat.gdprvl = u.gdpr.vendorListVersion;
             bat.tags = this.sanitizeTags(tags);
 
