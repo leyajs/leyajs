@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<!-- leyajs -->
+<script src="https://cdn.jsdelivr.net/gh/leyajs/leyajs/dist/main.js"></script>
+
+<!-- Set API Key and some tags once content is loaded  -->
+<script>
+    document.addEventListener('DOMContentLoaded', async (event) => {
+
+        //set api key
+        await Leya.setKey("YOUR_INGESTION_KEY");
+
+        //optionally set some tags
+        await Leya.setTags(["key1", "value1", "key2", "value2"]);
+    });
+</script>
+
+<body>
+<p>Example</p>
+</body>
+</html>
