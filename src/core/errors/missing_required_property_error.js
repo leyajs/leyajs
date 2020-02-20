@@ -1,1 +1,1 @@
-export class MissingRequiredProperty extends Error {}
+export class MissingRequiredPropertyError extends Error {}

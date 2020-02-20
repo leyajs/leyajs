@@ -1,1 +1,1 @@
-export class EmptyLineItemsMap extends Error {}
+export class EmptyLineItemsMapError extends Error {}

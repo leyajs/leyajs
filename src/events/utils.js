@@ -19,6 +19,10 @@ export class Utils {
         return [];
     }
 
+    static emptyArray(arr) {
+        return (Array.isArray(arr.request) && arr.request.length);
+    }
+
 }
 
 export const EVENT_TYPE = {

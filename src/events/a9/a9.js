@@ -3,8 +3,9 @@
 import uuid from "uuid/v4";
 import {LOGGER} from "../../core/utils";
 import {NoSessionError} from "../../core/errors/nosession_error";
-import {EmptyLineItemsMap} from "../../core/errors/empty_line_items_map_error";
-import {MissingRequiredProperty} from "../../core/errors/missing_required_property_error";
+import {EmptyLineItemsMapError} from "../../core/errors/empty_line_items_map_error";
+import {MissingRequiredPropertyError} from "../../core/errors/missing_required_property_error";
+import {ApiError} from "../../core/errors/api_error";
 import {EVENT_TYPE, Utils} from "../utils";
 
 export default class A9 {
@@ -19,17 +20,24 @@ export default class A9 {
         setInterval(function () {
             let time = new Date().getTime();
 
-            //remove auctions older than 2.5 minutes
+            //remove auctions older than 5 minutes
             this.auctions = this.auctions.filter(function (e) {
-                return time < e.time + (2500 * 60);
+                return time < e.time + (5000 * 60);
             }) || [];
 
         }.bind(this), 500);
     }
 
     async init() {
-        this.lineItemsMap = (await this.apiClient.getA9LineItemsMap()).data;
-        LOGGER.debug("A9 Line Items map: " + JSON.stringify(this.lineItemsMap));
+        this.apiClient.getA9LineItemsMap()
+            .then(e => {
+                this.lineItemsMap = e.data;
+                LOGGER.debug("A9 Line Items map: " + JSON.stringify(this.lineItemsMap));
+            })
+            .catch(err => {
+                LOGGER.error("API error fetching A9 Line Items Map", err);
+                throw new ApiError();
+            });
     }
 
     async getLineItemsMap() {
@@ -174,22 +182,22 @@ export default class A9 {
 
         if (!data.amzniid) {
             LOGGER.error("missing 'amzniid'");
-            throw new MissingRequiredProperty();
+            throw new MissingRequiredPropertyError();
         }
 
         if (!data.amznbid) {
             LOGGER.error("missing 'amznbid'");
-            throw new MissingRequiredProperty();
+            throw new MissingRequiredPropertyError();
         }
 
         if (!data.amznp) {
             LOGGER.error("missing 'amznp'");
-            throw new MissingRequiredProperty();
+            throw new MissingRequiredPropertyError();
         }
 
         if (!data.slotName) {
             LOGGER.error("missing 'slotName'");
-            throw new MissingRequiredProperty();
+            throw new MissingRequiredPropertyError();
         }
 
         data["cpm"] = this.amznbid2cpm(data.amznbid);
@@ -226,18 +234,19 @@ export default class A9 {
             data.finish = new Date().getTime();
         }
 
-        if (!(Array.isArray(data.request) && data.request.length)) {
+        if (Utils.emptyArray(data.request)) {
             LOGGER.error("A9 auction data missing request object");
-            throw new MissingRequiredProperty();
+            throw new MissingRequiredPropertyError();
         }
 
-        if (!(Array.isArray(data.response) && data.response.length)) {
+        if (Utils.emptyArray(data.response)) {
             LOGGER.error("A9 auction data missing response object");
-            throw new MissingRequiredProperty();
+            throw new MissingRequiredPropertyError();
         }
 
         //generate a random uuid in case amzniid is empty, happens when there is no bids from a9
-        let aid = (data.response.find(r => r.amzniid)).amzniid || uuid();
+        let bid = data.response.find(r => r.amzniid);
+        let aid = bid ? bid.amzniid :uuid();
 
         data.response = data.response.map(e => {
             let req = data.request.find(r => r.slotID === e.slotID);
@@ -254,7 +263,8 @@ export default class A9 {
 
     amznbid2cpm(amznbid) {
         if (Object.entries(this.lineItemsMap).length === 0 && this.lineItemsMap.constructor === Object) {
-            throw new EmptyLineItemsMap();
+            LOGGER.error("A9 Line Items Map is empty, call init() to retrieve it");
+            throw new EmptyLineItemsMapError();
         }
 
         return this.lineItemsMap[amznbid] || 0;

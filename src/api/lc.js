@@ -32,7 +32,7 @@ export class LeyaClient {
     async getA9LineItemsMap() {
         let k = await Leya.getKey();
 
-        return await Axios.get(A9_LINE_ITEMS_URL, {
+        return Axios.get(A9_LINE_ITEMS_URL, {
             headers: {
                 'x-api-token': k
             }
