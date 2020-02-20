@@ -150,8 +150,8 @@ export default class A9 {
                 i.amznp = ae.amznp;
                 i.amznbid = ae.amznbid;
                 i.cpm = ae.cpm;
-                i.auction_start = ae.start;
-                i.auction_finish = ae.finish;
+                i.auction_start = ae.auction_start;
+                i.auction_finish = ae.auction_finish;
                 i.slotID = ae.slotID;
                 i.slotName = ae.slotName;
                 i.size = ae.size;
