@@ -29,7 +29,7 @@ export default class A9 {
     }
 
     async init() {
-        this.apiClient.getA9LineItemsMap()
+        return this.apiClient.getA9LineItemsMap()
             .then(e => {
                 this.lineItemsMap = e.data;
                 LOGGER.debug("A9 Line Items map: " + JSON.stringify(this.lineItemsMap));
