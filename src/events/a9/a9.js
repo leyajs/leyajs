@@ -75,8 +75,8 @@ export default class A9 {
             //}
 
             e.response.forEach(el => {
-                el.start = e.start;
-                el.finish = e.finish;
+                el.auction_start = e.start;
+                el.auction_finish = e.finish;
                 el.session = s.id;
                 el.host = s.host;
                 el.path = s.path;
@@ -139,8 +139,8 @@ export default class A9 {
                 i.amznp = e.amznp;
                 i.amznbid = e.amznbid;
                 i.cpm = e.cpm;
-                i.start = new Date().getTime();
-                i.finish = new Date().getTime();
+                i.auction_start = new Date().getTime();
+                i.auction_finish = new Date().getTime();
                 i.slotID = "unknown";
                 i.slotName = e.slotName;
                 i.size = "unknown";
@@ -150,8 +150,8 @@ export default class A9 {
                 i.amznp = ae.amznp;
                 i.amznbid = ae.amznbid;
                 i.cpm = ae.cpm;
-                i.start = ae.start;
-                i.finish = ae.finish;
+                i.auction_start = ae.start;
+                i.auction_finish = ae.finish;
                 i.slotID = ae.slotID;
                 i.slotName = ae.slotName;
                 i.size = ae.size;
