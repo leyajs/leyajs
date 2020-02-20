@@ -246,7 +246,7 @@ export default class A9 {
 
         //generate a random uuid in case amzniid is empty, happens when there is no bids from a9
         let bid = data.response.find(r => r.amzniid);
-        let aid = bid ? bid.amzniid :uuid();
+        let aid = bid ? bid.amzniid : uuid();
 
         data.response = data.response.map(e => {
             let req = data.request.find(r => r.slotID === e.slotID);

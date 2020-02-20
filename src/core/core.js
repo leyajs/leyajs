@@ -2,6 +2,7 @@
 
 import {Session, User} from "./model/index";
 import {LOGGER, Utils} from "./utils"
+import uuid from "uuid/v4";
 import {SessionOpenError} from "./errors/sessionopen_error";
 import {NoSessionError} from "./errors/nosession_error";
 
@@ -29,7 +30,7 @@ export default class Core {
         //no previous session, create first
         if (this.session === null) {
 
-            this.session = new Session(Utils.generateSessionId(50));
+            this.session = new Session(uuid());
 
             LOGGER.debug("Started new session " + this.session.id);
         } else {
@@ -41,7 +42,7 @@ export default class Core {
             }
 
             //previous session is closed, we can open a new one
-            this.session = new Session(Utils.generateSessionId(50));
+            this.session = new Session(uuid());
 
             LOGGER.debug("Started new session " + this.session.id);
         }
