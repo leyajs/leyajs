@@ -2,6 +2,7 @@ import Axios from 'axios'
 import {LOGGER} from "../core/utils";
 
 const DEFAULT_HOST = 'https://analytics.leya.tech/events';
+const A9_LINE_ITEMS_URL = "https://analytics.leya.tech/a9/line-items";
 
 export class LeyaClient {
 
@@ -26,6 +27,16 @@ export class LeyaClient {
         if (this.events.length > this.batchSize) {
             await this.flush();
         }
+    }
+
+    async getA9LineItemsMap() {
+        let k = await Leya.getKey();
+
+        return await Axios.get(A9_LINE_ITEMS_URL, {
+            headers: {
+                'x-api-token': k
+            }
+        });
     }
 
     async getEventQueueSize() {
@@ -66,7 +77,7 @@ export class LeyaClient {
                             //fallback to axios
                             //https://caniuse.com/#search=sendBeacon
                             //in this case it's highly likely that there will be no session events
-                            return await Axios.post(DEFAULT_HOST, JSON.stringify(payload), {
+                            Axios.post(DEFAULT_HOST, JSON.stringify(payload), {
                                 headers: {
                                     'Content-Type': 'application/json',
                                     'x-api-token': k

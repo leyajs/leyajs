@@ -5,7 +5,7 @@ import {NoSessionError} from "../../core/errors/nosession_error";
 import {Auction} from "./model/events/auction";
 import {Impression} from "./model/events/impression";
 import {BidAfterTimeout} from "./model";
-import {EVENT_TYPE} from "../utils";
+import {EVENT_TYPE, Utils} from "../utils";
 
 export default class Prebid {
 
@@ -31,9 +31,9 @@ export default class Prebid {
             a.path = s.path;
             a.referrer = s.referrer;
             a.device = u.device;
-            a.gdprc = u.gdpr.consented || a.gdprc ;
+            a.gdprc = u.gdpr.consented || a.gdprc;
             a.gdprvl = u.gdpr.vendorListVersion;
-            a.tags = this.sanitizeTags(tags);
+            a.tags = Utils.sanitizeTags(tags);
 
             LOGGER.debug("Flattening auction event: " + JSON.stringify(a));
 
@@ -70,9 +70,9 @@ export default class Prebid {
             i.path = s.path;
             i.referrer = s.referrer;
             i.device = u.device;
-            i.gdprc = u.gdpr.consented || i.gdprc ;
+            i.gdprc = u.gdpr.consented || i.gdprc;
             i.gdprvl = u.gdpr.vendorListVersion;
-            i.tags = this.sanitizeTags(tags);
+            i.tags = Utils.sanitizeTags(tags);
 
             LOGGER.debug("Flattening impression event: " + JSON.stringify(i));
 
@@ -111,7 +111,7 @@ export default class Prebid {
             bat.device = u.device;
             bat.gdprc = u.gdpr.consented || bat.gdprc;
             bat.gdprvl = u.gdpr.vendorListVersion;
-            bat.tags = this.sanitizeTags(tags);
+            bat.tags = Utils.sanitizeTags(tags);
 
             LOGGER.debug("Flattening BidAfterTimeout event: " + JSON.stringify(bat));
 
@@ -249,25 +249,6 @@ export default class Prebid {
         });
 
         return rows;
-    }
-
-    sanitizeTags(tags) {
-        if (Array.isArray(tags) && tags.length > 0 && (tags.length % 2) === 0) {
-            let jo = {};
-
-            for (let i = 0; i < tags.length; i += 2) {
-                jo[tags[i].toLowerCase()] = tags[i + 1].toLowerCase();
-            }
-
-            const ordered = {};
-            Object.keys(jo).sort().forEach(function (key) {
-                ordered[key] = jo[key];
-            });
-
-            return Object.entries(ordered).flat();
-        }
-
-        return [];
     }
 
 }
