@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
 * **Impression Event**
 
-Add the following to you A9 Creatives:
+Add the following to your A9 Creatives:
 
 ````javascript
 <script>
