@@ -31,8 +31,12 @@ export default class A9 {
     async init() {
         return this.apiClient.getA9LineItemsMap()
             .then(e => {
-                this.lineItemsMap = e.data;
-                LOGGER.debug("A9 Line Items map: " + JSON.stringify(this.lineItemsMap));
+                if (e && e.data) {
+                    this.lineItemsMap = e.data;
+                    LOGGER.debug("A9 Line Items map: " + JSON.stringify(this.lineItemsMap));
+                } else {
+                    LOGGER.warn("Retrieved empty line items map, review configuration.");
+                }
             })
             .catch(err => {
                 LOGGER.error("API error fetching A9 Line Items Map", err);

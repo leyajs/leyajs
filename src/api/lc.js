@@ -32,11 +32,15 @@ export class LeyaClient {
     async getA9LineItemsMap() {
         let k = await Leya.getKey();
 
-        return Axios.get(A9_LINE_ITEMS_URL, {
-            headers: {
-                'x-api-token': k
-            }
-        });
+        if (k) {
+            return Axios.get(A9_LINE_ITEMS_URL, {
+                headers: {
+                    'x-api-token': k
+                }
+            });
+        } else {
+            LOGGER.warn("Can't retrieve line item map without an ingestion key, use Leya.setKey() to set yours.");
+        }
     }
 
     async getEventQueueSize() {
@@ -52,22 +56,22 @@ export class LeyaClient {
         }
 
         try {
-            if (k) {
-                while (this.events.length) {
-                    let d = this.events.splice(0, this.batchSize);
+            while (this.events.length) {
+                let d = this.events.splice(0, this.batchSize);
 
-                    LOGGER.debug("Flushing " + d.length + " events");
+                LOGGER.debug("Flushing " + d.length + " events");
 
-                    if (d.length) {
-                        let payload = {};
+                if (d.length) {
+                    let payload = {};
 
-                        d.forEach(e => {
-                            payload[e.type] = payload[e.type] || [];
-                            payload[e.type] = payload[e.type].concat(e.data);
-                        });
+                    d.forEach(e => {
+                        payload[e.type] = payload[e.type] || [];
+                        payload[e.type] = payload[e.type].concat(e.data);
+                    });
 
-                        LOGGER.debug(JSON.stringify(payload));
+                    LOGGER.debug(JSON.stringify(payload));
 
+                    if (k) {
                         if (navigator.sendBeacon) {
                             //if beacon exists, use it
                             let blob = new Blob([JSON.stringify(payload)], {type: 'text/plain; charset=UTF-8'});
@@ -84,6 +88,8 @@ export class LeyaClient {
                                 }
                             });
                         }
+                    } else {
+                        LOGGER.warn("missing ingestion key");
                     }
                 }
             }
