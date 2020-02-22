@@ -215,35 +215,38 @@ export default class Prebid {
         let rows = [];
 
         a.adunits.forEach(au => {
-            au.bidders.forEach(b => {
-                rows.push({
-                    session: a.session,
-                    host: a.host,
-                    referrer: a.referrer,
-                    path: a.path,
-                    device: a.device,
-                    gdprc: a.gdprc,
-                    gdprvl: a.gdprvl,
+            au.sizes.forEach(s => {
+                au.bidders.forEach(b => {
+                    rows.push({
+                        session: a.session,
+                        host: a.host,
+                        referrer: a.referrer,
+                        path: a.path,
+                        device: a.device,
+                        gdprc: a.gdprc,
+                        gdprvl: a.gdprvl,
 
-                    tags: a.tags,
+                        tags: a.tags,
 
-                    auction_id: a.id,
-                    auction_timeout: a.timeout,
-                    auction_start: a.start,
-                    auction_finish: a.finish,
+                        auction_id: a.id,
+                        auction_timeout: a.timeout,
+                        auction_start: a.start,
+                        auction_finish: a.finish,
 
-                    ad_unit_id: au.id,
-                    ad_unit_status: au.status,
-                    ad_unit_timeout: au.timeout,
-                    ad_unit_bid_start: au.start,
-                    ad_unit_bid_finish: au.finish,
+                        ad_unit_id: au.id,
+                        ad_unit_status: au.status,
+                        ad_unit_timeout: au.timeout,
+                        size: s,
+                        ad_unit_bid_start: au.start,
+                        ad_unit_bid_finish: au.finish,
 
-                    bidder_id: b.id,
-                    bidder_bid_after_timeout: b.bat,
-                    bidder_status: b.status,
-                    bidder_cpm: b.cpm,
-                    bidder_start: b.start,
-                    bidder_finish: b.finish
+                        bidder_id: b.id,
+                        bidder_bid_after_timeout: b.bat,
+                        bidder_status: b.status,
+                        bidder_cpm: b.cpm,
+                        bidder_start: b.start,
+                        bidder_finish: b.finish
+                    });
                 });
             });
         });

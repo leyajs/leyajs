@@ -7,6 +7,7 @@ export class AdUnit {
     _timeout = null;
     _start = null;
     _finish = null;
+    _sizes = [];
 
     _bidders = [];
 
@@ -58,6 +59,14 @@ export class AdUnit {
         this._bidders = value;
     }
 
+    get sizes() {
+        return this._sizes;
+    }
+
+    set sizes(value) {
+        this._sizes = value;
+    }
+
     static from(adu) {
         let ad = new AdUnit();
 
@@ -66,6 +75,7 @@ export class AdUnit {
         ad.timeout = adu.timeout;
         ad.start = adu.start;
         ad.finish = adu.finish;
+        ad.sizes = adu.adUnitSizes || [];
 
         let bidders = [];
 
