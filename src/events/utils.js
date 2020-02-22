@@ -20,7 +20,7 @@ export class Utils {
     }
 
     static emptyArray(arr) {
-        return (Array.isArray(arr.request) && arr.request.length);
+        return !(Array.isArray(arr) && arr.length);
     }
 
 }
