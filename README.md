@@ -3,7 +3,7 @@
 * **Adding `leya.js` to your page:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/leya/leyajs@1.0.3/dist/main.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/leya/leyajs@1.0.4/dist/main.js"></script>
 ```
 
 * **Once it's loaded, add your ingestion key to authenticate your events:**
@@ -12,7 +12,7 @@
 
 document.addEventListener('DOMContentLoaded', async (event) => {
     
-    //set your ingestion key, it's recommended to set it as soon as possible
+    //set your ingestion key, it's recommended to set it as soon as possible. NOTE: Leyajs needs to be loaded before your script
     await Leya.setKey(YOUR_INGESTION_KEY);
     
     //get configured key
