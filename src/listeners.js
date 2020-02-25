@@ -1,10 +1,5 @@
 //default config
 
-document.addEventListener('DOMContentLoaded', async (event) => {
-    //start session
-    await Leya.startSession();
-});
-
 window.addEventListener('load', async (event) => {
     //set consent f
     let f = function (u) {

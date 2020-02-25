@@ -13,6 +13,9 @@ import {LOGGER} from "../core/utils";
     let l = new LeyaEvents(lc);
     let a9 = new A9(lc);
 
+    Leya.startSession()
+        .then(() => LOGGER.info("Session Open"));
+
     lc.scheduleFlush()
         .then(() => LOGGER.info("Scheduled flush"));
 
