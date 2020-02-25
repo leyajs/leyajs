@@ -52,19 +52,4 @@ import Core from "./core"
         isSessionOpen: _isSessionOpen
     });
 
-    window.setInterval(async function () {
-        let u = await Leya.getUser();
-
-        if (u) {
-            let details = u.gdpr.gdprDetails();
-
-            if (details) {
-                Leya.setUserGdprConsent(details.getConsentValue);
-                if (details.vendorList) {
-                    Leya.setGdprVendorListVersion(details.vendorList.vendorListVersion);
-                }
-            }
-        }
-    }, 250);
-
 })(window);
