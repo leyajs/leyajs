@@ -1,41 +1,39 @@
 //default config
 
-window.addEventListener('load', (event) => {
+window.addEventListener('load', async (event) => {
     //set consent f
-    let f = function (u) {
+    let f = async function (u) {
         if (u) {
             let details = u.gdpr.gdprDetails();
 
             if (details) {
-                Leya.setUserGdprConsent(details.getConsentValue);
+                await Leya.setUserGdprConsent(details.getConsentValue);
                 if (details.vendorList) {
-                    Leya.setGdprVendorListVersion(details.vendorList.vendorListVersion);
+                    await Leya.setGdprVendorListVersion(details.vendorList.vendorListVersion);
                 }
             }
         }
     };
 
     //get consent
-    Leya.getUser().then(u => {
-        //set consent
-        f(u);
-    });
+    let u = await Leya.getUser();
+    //set consent
+    await f(u);
 
     //refresh consent
-    window.setInterval(function () {
-        Leya.getUser().then(u => {
-            f(u);
-        });
+    window.setInterval(async function () {
+        let u = await Leya.getUser();
+        await f(u);
     }.bind(this), 250);
 
     //record page view
-    Leya.Events.recordPageView();
+    await Leya.Events.recordPageView();
 });
 
-window.addEventListener('beforeunload', (event) => {
+window.addEventListener('beforeunload', async (event) => {
     //attempt to close session
-    Leya.finishSession()
-        .then(() => LOGGER.info("Session closed"));
+    await Leya.finishSession();
 
     delete event['returnValue'];
+
 });
