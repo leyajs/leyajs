@@ -3,7 +3,7 @@
 * **Adding `leya.js` to your page:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/leya/leyajs@1.0.4/dist/main.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/leya/leyajs@1.0.5/dist/main.js"></script>
 ```
 
 * **Once it's loaded, add your ingestion key to authenticate your events:**
