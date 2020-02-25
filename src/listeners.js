@@ -1,6 +1,6 @@
 //default config
 
-window.addEventListener('load', async (event) => {
+window.addEventListener('load', (event) => {
     //set consent f
     let f = function (u) {
         if (u) {
@@ -16,24 +16,26 @@ window.addEventListener('load', async (event) => {
     };
 
     //get consent
-    let u = await Leya.getUser();
-    //set consent
-    f(u);
+    Leya.getUser().then(u => {
+        //set consent
+        f(u);
+    });
 
     //refresh consent
-    window.setInterval(async function () {
-        let u = await Leya.getUser();
-        f(u);
+    window.setInterval(function () {
+        Leya.getUser().then(u => {
+            f(u);
+        });
     }.bind(this), 250);
 
     //record page view
-    await Leya.Events.recordPageView();
+    Leya.Events.recordPageView();
 });
 
-window.addEventListener('beforeunload', async (event) => {
+window.addEventListener('beforeunload', (event) => {
     //attempt to close session
-    await Leya.finishSession();
+    Leya.finishSession()
+        .then(() => LOGGER.info("Session closed"));
 
     delete event['returnValue'];
-
 });
