@@ -6,6 +6,12 @@
 <script src="https://cdn.jsdelivr.net/gh/leya/leyajs@1.0.6/dist/main.js"></script>
 ```
 
+or you can reference the latest version directly (careful when using this in production)
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/leya/leyajs/dist/main.js"></script>
+```
+
 * **Once it's loaded, add your ingestion key to authenticate your events:**
 
 ````javascript
