@@ -6,7 +6,7 @@ const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 
 
 const config = {
-    entry: ['babel-polyfill', './src/core/main.js', './src/events/main.js', './src/listeners.js'],
+    entry: ['./src/core/main.js', './src/events/main.js', './src/listeners.js'],
     output: {
         path: path.join(__dirname, '/dist'),
         filename: '[name].js'
