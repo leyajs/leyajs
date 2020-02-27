@@ -23,7 +23,13 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     
     //get configured key
     const k = await Leya.getKey();
-   
+    
+    //add new tags, adding them as soon as possible will guarantee that leyajs picks them up
+    //array needs to have an even number of elements (key, value) 
+    await Leya.setTags(["key1", "value1", "key2", "value2"].concat(await Leya.getTags()));
+    
+    //get tags
+    const tags = await Leya.getTags();
 });
 
 ````
@@ -32,13 +38,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 
 ````javascript
 document.addEventListener('load', async (event) => {
-    //add new tags
-    //array needs to have an even number of elements (key, value) 
-    await Leya.setTags(["key1", "value1", "key2", "value2"].concat(await Leya.getTags()));
-    
-    //get tags
-    const tags = await Leya.getTags();
-    
     //set User GDPR Consent
     //NOTE Possible values: 0 User said NO to all, 1 said YES to all, 2 y/n to some, 3 unknown
     await Leya.setUserGdprConsent(1); 
@@ -108,8 +107,9 @@ Add the following to your A9 Creatives:
     	slotName: "%%PATTERN:AdUnit%%"
     };
     
-    if(Leya) {
-    	Leya.Events.A9.handleImpressionEvent(p);
+    let leyajs = window.Leya || window.parent.Leya;
+    if(leyajs) {
+    	leyajs.Events.A9.handleImpressionEvent(p);
     }
 </script>
 ````
