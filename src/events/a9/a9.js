@@ -20,12 +20,12 @@ export default class A9 {
         setInterval(function () {
             let time = new Date().getTime();
 
-            //remove auctions older than 5 minutes
+            //remove auctions older than 30 minutes
             this.auctions = this.auctions.filter(function (e) {
-                return time < e.time + (5000 * 60);
+                return time < e.time + (30000 * 60);
             }) || [];
 
-        }.bind(this), 500);
+        }.bind(this), 1000);
     }
 
     async init() {
