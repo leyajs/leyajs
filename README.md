@@ -3,7 +3,7 @@
 * **Adding `leya.js` to your page:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/leya/leyajs@1.0.7/dist/main.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/leya/leyajs@1.0.8/dist/main.js"></script>
 ```
 
 or you can reference the latest version directly (careful when using this in production)
