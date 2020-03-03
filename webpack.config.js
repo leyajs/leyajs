@@ -6,7 +6,7 @@ const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 
 
 const config = {
-    entry: ['./src/core/main.js', './src/events/main.js', './src/listeners.js'],
+    entry: ['./src/main.js'],
     output: {
         path: path.join(__dirname, '/dist'),
         filename: '[name].js'
