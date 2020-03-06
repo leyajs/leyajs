@@ -111,12 +111,6 @@ import {LeyaClient} from "./api/lc";
             //record page view
             await Leya.Events.recordPageView();
         }.bind(this), 100);
-
-        //refresh consent every 500ms
-        window.setInterval(async function () {
-            let u = await Leya.getUser();
-            await f(u);
-        }.bind(this), 500);
     });
 
     window.addEventListener('beforeunload', async (event) => {
