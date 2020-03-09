@@ -74,19 +74,12 @@ export class LeyaClient {
                     if (k) {
                         if (navigator.sendBeacon) {
                             //if beacon exists, use it
-                            let blob = new Blob([JSON.stringify(payload)], {type: 'text/plain; charset=UTF-8'});
-                            navigator.sendBeacon(DEFAULT_HOST + '?xat=' + k, blob);
+                            this.beacon(k, payload);
                         }
                         else {
                             //fallback to axios
                             //https://caniuse.com/#search=sendBeacon
-                            //in this case it's highly likely that there will be no session events
-                            Axios.post(DEFAULT_HOST, JSON.stringify(payload), {
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'x-api-token': k
-                                }
-                            });
+                            this.axios(k, payload);
                         }
                     } else {
                         LOGGER.warn("missing ingestion key");
@@ -96,6 +89,25 @@ export class LeyaClient {
         } finally {
             await this.scheduleFlush();
         }
+    }
+
+    beacon(key, payload) {
+        let blob = new Blob([JSON.stringify(payload)], {type: 'text/plain; charset=UTF-8'});
+        if(!navigator.sendBeacon(DEFAULT_HOST + '?xat=' + key, blob)) {
+            //beacon failed, fallback to axios
+            LOGGER.debug("failed to queue beacon request, falling back to axios");
+            this.axios(key, payload);
+        }
+    }
+
+    axios(key, payload) {
+        Axios.post(DEFAULT_HOST, JSON.stringify(payload), {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-token': key
+            }
+        });
+        //todo requeue failed requests
     }
 }
 
