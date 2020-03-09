@@ -12,8 +12,6 @@ or you can reference the latest version directly (careful when using this in pro
 <script src="https://cdn.jsdelivr.net/gh/leya/leyajs/dist/main.js"></script>
 ```
 
-###### NOTE: You can add _async_ to the \<script\> _tag_ to load the script asynchronously
-
 * **Once it's loaded, add your ingestion key to authenticate your events:**
 
 ````javascript
