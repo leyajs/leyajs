@@ -71,6 +71,7 @@ export default class Core {
     }
 
     async setTags(tags) {
+        this.validateTags(tags);
         if (Array.isArray(tags)) {
             if (tags.length % 2 === 0) {
                 tags = tags.map(function (x) {
@@ -115,4 +116,51 @@ export default class Core {
         return this.session !== null && this.session.finish === null;
     }
 
+    async addTags(ntags) {
+        this.validateTags(ntags);
+        if (Array.isArray(ntags)) {
+            if (ntags.length % 2 === 0) {
+                ntags = ntags.map(function (x) {
+                    return x.toLowerCase()
+                });
+
+                ntags.forEach(function (val, i) {
+                    if (i % 2 === 0) {
+                        const ci = this.tags.indexOf(val);
+                        if (ci >= 0) {
+                            //update key
+                            this.tags[ci + 1] = ntags[i + 1];
+                        } else {
+                            //add key val
+                            this.tags = this.tags.concat(ntags);
+                        }
+                    }
+                }.bind(this));
+            } else {
+                throw new Error("array argument requires pair size, two elements for each key, value pair: ['key1', 'value1', 'key2', 'value2']")
+            }
+        } else {
+            throw new Error("array argument is required");
+        }
+    }
+
+    async removeTags(rt) {
+        rt = [].concat(rt);
+
+        rt.forEach(function (t) {
+            const ci = this.tags.indexOf(t);
+            if (ci >= 0 && ci % 2 === 0) {
+                this.tags.splice(ci, 2);
+            }
+        }.bind(this));
+    }
+
+    validateTags(tags) {
+        tags = [].concat(tags);
+        tags.forEach(e => {
+            if (!(typeof e === 'number' || typeof e === 'string')) {
+                throw new Error("invalid tag '" + e + "'");
+            }
+        })
+    }
 }

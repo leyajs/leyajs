@@ -21,6 +21,8 @@ import {LeyaClient} from "./api/lc";
     let _finishSession = () => l.finishSession();
     let _getSession = () => l.getSession();
     let _setTags = (tags) => l.setTags(tags);
+    let _addTags = (tags) => l.addTags(tags);
+    let _removeTags = (tags) => l.removeTags(tags);
     let _getTags = () => l.getTags();
     let _getUser = () => l.getUser();
     let _setUserGdprConsent = (g) => l.setUserGdprConsent(g);
@@ -65,6 +67,8 @@ import {LeyaClient} from "./api/lc";
         getSession: _getSession,
         getTags: _getTags,
         setTags: _setTags,
+        addTags: _addTags,
+        removeTags: _removeTags,
         getUser: _getUser,
         setUserGdprConsent: _setUserGdprConsent,
         setGdprVendorListVersion: _setGdprVendorListVersion,
