@@ -3,7 +3,7 @@
 * **Adding `leya.js` to your page:**
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/leya/leyajs@1.0.13/dist/main.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/leya/leyajs@1.0.14/dist/main.js"></script>
 ```
 
 or you can reference the latest version directly (careful when using this in production)
@@ -26,7 +26,13 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     
     //add new tags, adding them as soon as possible will guarantee that leyajs picks them up
     //array needs to have an even number of elements (key, value) 
-    await Leya.setTags(["key1", "value1", "key2", "value2"].concat(await Leya.getTags()));
+    Leya.addTags(["key1", "value1", "key2", "value2"]);
+    
+    //or overwrite current tags
+    //Leya.setTags(["key1", "value1", "key2", "value2"]);
+    
+    //you can also remove tags and their values 
+    //Leya.removeTags(["key1","key2"]);
     
     //get tags
     const tags = await Leya.getTags();
