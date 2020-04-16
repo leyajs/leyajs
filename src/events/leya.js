@@ -40,7 +40,7 @@ export default class LeyaEvents {
             LOGGER.debug("Recording page view event " + JSON.stringify(data));
 
             //send event using api client
-            return this.apiClient.sendEvent(data);
+            return this.apiClient.sendEvent(data, false);
         }
         else {
             LOGGER.error("No session");
@@ -85,7 +85,7 @@ export default class LeyaEvents {
         LOGGER.debug("Recording session closed event " + JSON.stringify(data));
 
         //send event using api client
-        return this.apiClient.sendEvent(data);
+        return this.apiClient.sendEvent(data, true);
     }
 
 }

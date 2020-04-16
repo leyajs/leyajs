@@ -21,11 +21,15 @@ export class LeyaClient {
         this.flushTimeoutId = setTimeout(this.flush.bind(this), this.flushTimeout);
     }
 
-    async sendEvent(event) {
+    async sendEvent(event, flush) {
         this.events.push(event);
 
-        if (this.events.length > this.batchSize) {
-            await this.flush();
+        if (flush) {
+            await this.flush(true);
+        } else {
+            if (this.events.length > this.batchSize) {
+                await this.flush(false);
+            }
         }
     }
 
@@ -47,7 +51,7 @@ export class LeyaClient {
         return this.events.length;
     }
 
-    async flush() {
+    async flush(useBeacon) {
         let k = await Leya.getKey();
 
         if (this.flushTimeoutId) {
@@ -72,7 +76,7 @@ export class LeyaClient {
                     LOGGER.debug(JSON.stringify(payload));
 
                     if (k) {
-                        if (navigator.sendBeacon) {
+                        if (navigator.sendBeacon && useBeacon) {
                             //if beacon exists, use it
                             this.beacon(k, payload);
                         }
@@ -93,7 +97,7 @@ export class LeyaClient {
 
     beacon(key, payload) {
         let blob = new Blob([JSON.stringify(payload)], {type: 'text/plain; charset=UTF-8'});
-        if(!navigator.sendBeacon(DEFAULT_HOST + '?xat=' + key, blob)) {
+        if (!navigator.sendBeacon(DEFAULT_HOST + '?xat=' + key, blob)) {
             //beacon failed, fallback to axios
             LOGGER.debug("failed to queue beacon request, falling back to axios");
             this.axios(key, payload);

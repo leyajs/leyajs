@@ -31,7 +31,7 @@ export default class Prebid {
             a.path = s.path;
             a.referrer = s.referrer;
             a.device = u.device;
-            a.gdprc =  (a.gdprc !== 3 || u.gdpr.consented !== 3) ? (a.gdprc !== 3 ? a.gdprc : u.gdpr.consented) : u.gdpr.consented;
+            a.gdprc = (a.gdprc !== 3 || u.gdpr.consented !== 3) ? (a.gdprc !== 3 ? a.gdprc : u.gdpr.consented) : u.gdpr.consented;
             a.gdprvl = u.gdpr.vendorListVersion;
             a.tags = Utils.sanitizeTags(tags);
 
@@ -46,7 +46,7 @@ export default class Prebid {
                 data: far
             };
 
-            return this.apiClient.sendEvent(data);
+            return this.apiClient.sendEvent(data, false);
         } else {
             LOGGER.error("No session");
             throw new NoSessionError();
@@ -70,7 +70,7 @@ export default class Prebid {
             i.path = s.path;
             i.referrer = s.referrer;
             i.device = u.device;
-            i.gdprc =  (i.gdprc !== 3 || u.gdpr.consented !== 3) ? (i.gdprc !== 3 ? i.gdprc : u.gdpr.consented) : u.gdpr.consented;
+            i.gdprc = (i.gdprc !== 3 || u.gdpr.consented !== 3) ? (i.gdprc !== 3 ? i.gdprc : u.gdpr.consented) : u.gdpr.consented;
             i.gdprvl = u.gdpr.vendorListVersion;
             i.tags = Utils.sanitizeTags(tags);
 
@@ -85,7 +85,7 @@ export default class Prebid {
                 data: fir
             };
 
-            return this.apiClient.sendEvent(data);
+            return this.apiClient.sendEvent(data, false);
         } else {
             LOGGER.error("No session");
             throw new NoSessionError();
@@ -109,7 +109,7 @@ export default class Prebid {
             bat.path = s.path;
             bat.referrer = s.referrer;
             bat.device = u.device;
-            bat.gdprc =  (bat.gdprc !== 3 || u.gdpr.consented !== 3) ? (bat.gdprc !== 3 ? bat.gdprc : u.gdpr.consented) : u.gdpr.consented;
+            bat.gdprc = (bat.gdprc !== 3 || u.gdpr.consented !== 3) ? (bat.gdprc !== 3 ? bat.gdprc : u.gdpr.consented) : u.gdpr.consented;
             bat.gdprvl = u.gdpr.vendorListVersion;
             bat.tags = Utils.sanitizeTags(tags);
 
@@ -124,7 +124,7 @@ export default class Prebid {
                 data: fbatr
             };
 
-            return this.apiClient.sendEvent(data);
+            return this.apiClient.sendEvent(data, false);
         } else {
             LOGGER.error("No session");
             throw new NoSessionError();

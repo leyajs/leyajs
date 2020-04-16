@@ -101,7 +101,7 @@ export default class A9 {
                 data: e.response
             };
 
-            return this.apiClient.sendEvent(data);
+            return this.apiClient.sendEvent(data, false);
         } else {
             LOGGER.error("No session");
             throw new NoSessionError();
@@ -167,7 +167,7 @@ export default class A9 {
                 data: i
             };
 
-            return this.apiClient.sendEvent(data);
+            return this.apiClient.sendEvent(data, false);
         } else {
             LOGGER.error("No session");
             throw new NoSessionError();
