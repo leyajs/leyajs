@@ -8,7 +8,9 @@
     "build": "rm -rf dist && npm run test && webpack --mode production"
   },
   "jest": {
-    "testMatch": ["**/*.test.js"],
+    "testMatch": [
+      "**/*.test.js"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 85,
