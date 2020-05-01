@@ -36,7 +36,7 @@ import {LeyaClient} from "./api/lc";
     let lc = new LeyaClient(fint, bs);
     let p = new Prebid(lc);
     let le = new LeyaEvents(lc);
-    let a9 = new A9(lc);
+    let a9 = new A9(lc, 1800, 10);
 
     //leya events
     let _recordPageView = () => le.recordPageView();
@@ -92,7 +92,7 @@ import {LeyaClient} from "./api/lc";
     };
 
     //event handlers
-    window.addEventListener('load', async (event) => {
+    window.addEventListener('load', async () => {
         //set consent f
         let f = async function (u) {
             if (u) {
@@ -122,7 +122,6 @@ import {LeyaClient} from "./api/lc";
         await Leya.finishSession();
 
         delete event['returnValue'];
-
     });
 
 })(window);

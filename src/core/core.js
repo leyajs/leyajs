@@ -20,11 +20,11 @@ export default class Core {
 
     async setKey(key) {
         this.key = key;
-    };
+    }
 
     async getKey() {
         return this.key;
-    };
+    }
 
     async startSession() {
         //no previous session, create first
@@ -71,21 +71,25 @@ export default class Core {
     }
 
     async setTags(tags) {
-        this.validateTags(tags);
+        if (!tags) {
+            throw new Error("array argument is required");
+        }
+
         if (Array.isArray(tags)) {
+            this.validateTags(tags);
             if (tags.length % 2 === 0) {
                 tags = tags.map(function (x) {
                     return x.toLowerCase()
                 });
                 this.tags = tags;
+
+                return this.getTags();
             } else {
                 throw new Error("array argument requires pair size, two elements for each key, value pair: ['key1', 'value1', 'key2', 'value2']")
             }
         } else {
             throw new Error("array argument is required");
         }
-
-        return this.getTags();
     }
 
     async getTags() {
@@ -117,8 +121,12 @@ export default class Core {
     }
 
     async addTags(ntags) {
-        this.validateTags(ntags);
+        if (!ntags) {
+            throw new Error("array argument is required");
+        }
+
         if (Array.isArray(ntags)) {
+            this.validateTags(ntags);
             if (ntags.length % 2 === 0) {
                 ntags = ntags.map(function (x) {
                     return x.toLowerCase()
@@ -145,6 +153,10 @@ export default class Core {
     }
 
     async removeTags(rt) {
+        if (!rt) {
+            throw new Error("argument is required");
+        }
+
         rt = [].concat(rt);
 
         rt.forEach(function (t) {
@@ -158,9 +170,13 @@ export default class Core {
     validateTags(tags) {
         tags = [].concat(tags);
         tags.forEach(e => {
-            if (!(typeof e === 'number' || typeof e === 'string')) {
-                throw new Error("invalid tag '" + e + "'");
-            }
+            this.isValidTag(e);
         })
+    }
+
+    isValidTag(e) {
+        if (!(typeof e === 'number' || typeof e === 'string')) {
+            throw new Error("invalid tag '" + e + "'");
+        }
     }
 }

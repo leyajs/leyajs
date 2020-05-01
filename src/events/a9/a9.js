@@ -14,18 +14,18 @@ export default class A9 {
     auctions = [];
     lineItemsMap = {};
 
-    constructor(apiClient) {
+    constructor(apiClient, auctionTtlInSeconds, intervalInSeconds) {
         this.apiClient = apiClient;
 
         setInterval(function () {
             let time = new Date().getTime();
 
-            //remove auctions older than 30 minutes
+            //remove auctions older than auctionTtlInMinutes minutes
             this.auctions = this.auctions.filter(function (e) {
-                return time < e.time + (30000 * 60);
-            }) || [];
+                return time < e.time + (auctionTtlInSeconds * 1000);
+            });
 
-        }.bind(this), 1000);
+        }.bind(this), intervalInSeconds * 1000);
     }
 
     async init() {
@@ -49,6 +49,7 @@ export default class A9 {
     }
 
     async handleAuctionEvent(e) {
+
         if (await Leya.isSessionOpen()) {
 
             let s = await Leya.getSession();
@@ -106,7 +107,7 @@ export default class A9 {
             LOGGER.error("No session");
             throw new NoSessionError();
         }
-    };
+    }
 
     async handleImpressionEvent(e) {
 
@@ -172,7 +173,7 @@ export default class A9 {
             LOGGER.error("No session");
             throw new NoSessionError();
         }
-    };
+    }
 
     //private
 

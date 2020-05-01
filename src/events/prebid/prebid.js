@@ -51,7 +51,7 @@ export default class Prebid {
             LOGGER.error("No session");
             throw new NoSessionError();
         }
-    };
+    }
 
     async handleImpressionEvent(e) {
 
@@ -90,7 +90,7 @@ export default class Prebid {
             LOGGER.error("No session");
             throw new NoSessionError();
         }
-    };
+    }
 
     async handleBidAfterTimeoutEvent(e) {
 
@@ -129,7 +129,7 @@ export default class Prebid {
             LOGGER.error("No session");
             throw new NoSessionError();
         }
-    };
+    }
 
     //private
 

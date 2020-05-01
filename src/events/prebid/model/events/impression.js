@@ -177,7 +177,7 @@ export class Impression {
         i.cpm = impression.cpm;
         i.media_type = impression.mediaType;
 
-        if (impression.size.width && impression.size.height) {
+        if (impression.size && impression.size.width && impression.size.height) {
             i.size = impression.size.width + 'x' + impression.size.height;
         }
 

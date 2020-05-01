@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["eslint:recommended"],
+  "rules": {
+    "no-inner-declarations": "off"
+  },
+  "globals": {
+    "Leya": true,
+    "window": true,
+    "setTimeout": true,
+    "clearTimeout": true,
+    "navigator": true,
+    "Blob": true,
+    "setInterval": true,
+    "document": true
+  }
+}

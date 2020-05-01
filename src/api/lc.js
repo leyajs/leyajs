@@ -14,7 +14,7 @@ export class LeyaClient {
 
     constructor(flushTimeout, batchSize) {
         this.flushTimeout = flushTimeout;
-        this.batchSize = batchSize;
+        this.batchSize = batchSize <= 0 ? 1 : batchSize;
     }
 
     async scheduleFlush() {
@@ -27,7 +27,7 @@ export class LeyaClient {
         if (flush) {
             await this.flush(true);
         } else {
-            if (this.events.length > this.batchSize) {
+            if (this.events.length >= this.batchSize) {
                 await this.flush(false);
             }
         }
@@ -65,29 +65,27 @@ export class LeyaClient {
 
                 LOGGER.debug("Flushing " + d.length + " events");
 
-                if (d.length) {
-                    let payload = {};
+                let payload = {};
 
-                    d.forEach(e => {
-                        payload[e.type] = payload[e.type] || [];
-                        payload[e.type] = payload[e.type].concat(e.data);
-                    });
+                d.forEach(e => {
+                    payload[e.type] = payload[e.type] || [];
+                    payload[e.type] = payload[e.type].concat(e.data);
+                });
 
-                    LOGGER.debug(JSON.stringify(payload));
+                LOGGER.debug(JSON.stringify(payload));
 
-                    if (k) {
-                        if (navigator.sendBeacon && useBeacon) {
-                            //if beacon exists, use it
-                            this.beacon(k, payload);
-                        }
-                        else {
-                            //fallback to axios
-                            //https://caniuse.com/#search=sendBeacon
-                            this.axios(k, payload);
-                        }
-                    } else {
-                        LOGGER.warn("missing ingestion key");
+                if (k) {
+                    if (navigator.sendBeacon && useBeacon) {
+                        //if beacon exists, use it
+                        this.beacon(k, payload);
                     }
+                    else {
+                        //fallback to axios
+                        //https://caniuse.com/#search=sendBeacon
+                        this.axios(k, payload);
+                    }
+                } else {
+                    LOGGER.warn("missing ingestion key");
                 }
             }
         } finally {

@@ -197,7 +197,7 @@ export class BidAfterTimeout {
         bat.bidder_finish = bidAfterTimeout.finish;
         bat.media_type = bidAfterTimeout.mediaType;
 
-        if (bidAfterTimeout.size.width && bidAfterTimeout.size.height) {
+        if (bidAfterTimeout.size && bidAfterTimeout.size.width && bidAfterTimeout.size.height) {
             bat.size = bidAfterTimeout.size.width + 'x' + bidAfterTimeout.size.height;
         }
 
