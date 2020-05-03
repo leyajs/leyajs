@@ -23,8 +23,15 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     
     //get configured key
     const k = await Leya.getKey();
-    
-    //add new tags, adding them as soon as possible will guarantee that leyajs picks them up
+});
+
+````
+
+* **Leyajs exposes some utility methods that you can use to enrich your events**
+
+````javascript
+document.addEventListener('load', async (event) => {
+    //add new tags, adding them as soon as possible (e.g.: on DOMContentLoaded) will guarantee that leyajs picks them up 
     //array needs to have an even number of elements (key, value) 
     Leya.addTags(["key1", "value1", "key2", "value2"]);
     
@@ -36,14 +43,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     
     //get tags
     const tags = await Leya.getTags();
-});
-
-````
-
-* **Leyajs exposes some utility methods that you can use to enrich your events**
-
-````javascript
-document.addEventListener('load', async (event) => {
+    
     //set User GDPR Consent
     //NOTE Possible values: 0 User said NO to all, 1 said YES to all, 2 y/n to some, 3 unknown
     await Leya.setUserGdprConsent(1); 
