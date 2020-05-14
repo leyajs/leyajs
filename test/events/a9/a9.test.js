@@ -11,7 +11,7 @@ import {MissingRequiredPropertyError} from "../../../src/core/errors/missing_req
 jest.mock('axios');
 
 beforeEach(() => {
-    Axios.post.mockImplementationOnce(() => Promise.resolve());
+    Axios.mockImplementationOnce(() => Promise.resolve());
 
     let u = new User();
     u.gdpr = new Gdpr();
@@ -147,7 +147,7 @@ test("it should handle, and send, a valid auction event", async () => {
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should handle, and send, a valid auction event", async () => {
@@ -199,7 +199,7 @@ test("it should handle, and send, a valid auction event", async () => {
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should throw an error when attempting to handle auction event without session", async () => {
@@ -369,7 +369,7 @@ test("should handle, and send, a valid impression event", async () => {
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
     //
     const impression = {
         amzniid: "a",
@@ -384,7 +384,7 @@ test("should handle, and send, a valid impression event", async () => {
     expect(window.Leya.getUser).toHaveBeenCalled();
     expect(window.Leya.getKey).toHaveBeenCalled();
     expect(window.Leya.getTags).toHaveBeenCalled();
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("should handle, and send, a valid impression event without matching previous auction", async () => {
@@ -424,7 +424,7 @@ test("should handle, and send, a valid impression event without matching previou
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
     //
     const impression = {
         amzniid: "n",
@@ -440,7 +440,7 @@ test("should handle, and send, a valid impression event without matching previou
     expect(window.Leya.getKey).toHaveBeenCalled();
     expect(window.Leya.getTags).toHaveBeenCalled();
     expect(warn).toHaveBeenCalled();
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("should handle, and send, a valid impression event without matching previous auction (impression for an auction that never happened)", async done => {
@@ -485,7 +485,7 @@ test("should handle, and send, a valid impression event without matching previou
                 expect(window.Leya.getKey).toHaveBeenCalled();
                 expect(window.Leya.getTags).toHaveBeenCalled();
                 expect(warn).toHaveBeenCalled();
-                expect(Axios.post).toHaveBeenCalled();
+                expect(Axios).toHaveBeenCalled();
                 done();
             });
     }, 2000);
@@ -529,7 +529,7 @@ test("should handle, and send, a valid impression event without matching previou
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
     //
     const impression = {
         amzniid: "a",
@@ -546,7 +546,7 @@ test("should handle, and send, a valid impression event without matching previou
                 expect(window.Leya.getKey).toHaveBeenCalled();
                 expect(window.Leya.getTags).toHaveBeenCalled();
                 expect(warn).toHaveBeenCalled();
-                expect(Axios.post).toHaveBeenCalled();
+                expect(Axios).toHaveBeenCalled();
                 done();
             });
     }, 2000);
@@ -588,7 +588,7 @@ test("should throw an error when attempting to handle impression event without o
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
     //
     const impression = {
         amzniid: "a",
@@ -638,7 +638,7 @@ test("should throw an error when impression lacks required attribute", async () 
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
     //
     const impression = {
         amzniid: "n",
@@ -685,7 +685,7 @@ test("should throw an error when impression lacks required attribute", async () 
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
     //
     const impression = {
         amzniid: "n",
@@ -732,7 +732,7 @@ test("should throw an error when impression lacks required attribute", async () 
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
     //
     const impression = {
         amzniid: "n",
@@ -779,7 +779,7 @@ test("should throw an error when impression lacks required attribute", async () 
 
     await a9.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
     //
     const impression = {
         amznbid: "m",

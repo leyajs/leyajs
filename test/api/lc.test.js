@@ -7,7 +7,7 @@ jest.mock('axios');
 
 beforeEach(() => {
     Axios.get.mockImplementationOnce(() => Promise.resolve());
-    Axios.post.mockImplementationOnce(() => Promise.resolve());
+    Axios.mockImplementationOnce(() => Promise.resolve());
 
     window.Leya = {};
     window.Leya.getKey = jest.fn();
@@ -42,7 +42,7 @@ test("should flush, and send, events once batch size is reached", async () => {
     await c.sendEvent({type: "test", data: {}});
 
     expect(flush).toHaveBeenCalled();
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("should flush, and send event using axio when sendBeacon fails", async () => {
@@ -56,7 +56,7 @@ test("should flush, and send event using axio when sendBeacon fails", async () =
     await c.sendEvent({type: "testBeacon", data: {}}, true);
 
     expect(flush).toHaveBeenCalled();
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("should flush, and send event using beacon when sendBeacon succeeds and not fallback to Axios", async () => {
@@ -71,7 +71,7 @@ test("should flush, and send event using beacon when sendBeacon succeeds and not
 
     expect(flush).toHaveBeenCalled();
     expect(navigator.sendBeacon).toHaveBeenCalled();
-    expect(Axios.post).not.toHaveBeenCalled();
+    expect(Axios).not.toHaveBeenCalled();
 });
 
 test("should flush, and send, events once flush timeout is reached", async done => {
@@ -87,7 +87,7 @@ test("should flush, and send, events once flush timeout is reached", async done 
 
     setTimeout(function () {
         expect(flush).toHaveBeenCalled();
-        expect(Axios.post).toHaveBeenCalled();
+        expect(Axios).toHaveBeenCalled();
         done();
     }, 1100);
 });

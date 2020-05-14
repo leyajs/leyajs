@@ -1,6 +1,6 @@
 "use strict";
 
-import uuid from "uuid/v4";
+import { v4 as uuid } from 'uuid';
 import {LOGGER} from "../../core/utils";
 import {NoSessionError} from "../../core/errors/nosession_error";
 import {EmptyLineItemsMapError} from "../../core/errors/empty_line_items_map_error";

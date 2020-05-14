@@ -1,8 +1,11 @@
 import Axios from 'axios'
 import {LOGGER} from "../core/utils";
+import * as rax from 'retry-axios';
 
 const DEFAULT_HOST = 'https://analytics.leya.tech/events';
 const A9_LINE_ITEMS_URL = "https://analytics.leya.tech/a9/line-items";
+
+rax.attach(Axios);
 
 export class LeyaClient {
 
@@ -103,13 +106,22 @@ export class LeyaClient {
     }
 
     axios(key, payload) {
-        Axios.post(DEFAULT_HOST, JSON.stringify(payload), {
+        Axios({
+            method: 'post',
+            url: DEFAULT_HOST,
+            data: JSON.stringify(payload),
             headers: {
                 'Content-Type': 'application/json',
                 'x-api-token': key
+            },
+            raxConfig: {
+                instance: Axios,
+                httpMethodsToRetry: ['GET', 'HEAD', 'OPTIONS', 'DELETE', 'PUT', 'POST'],
+                retry: 3,
+                noResponseRetries: 2,
+                backoffType: 'exponential'
             }
         });
-        //todo requeue failed requests
     }
 }
 

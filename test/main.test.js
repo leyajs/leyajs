@@ -8,8 +8,10 @@ jest.mock('axios');
 beforeEach(() => {
     Leya.setKey("test");
 
+    Axios.mockImplementationOnce(() => Promise.resolve());
     Axios.get.mockImplementationOnce(() => Promise.resolve());
     Axios.post.mockImplementationOnce(() => Promise.resolve());
+
 });
 
 afterEach(() => {
@@ -160,7 +162,7 @@ test('finishSession is called when before unload fires', done => {
             expect(getSession).toHaveBeenCalled();
             expect(getUser).toHaveBeenCalled();
             expect(getTags).toHaveBeenCalled();
-            expect(Axios.post).toHaveBeenCalled();
+            expect(Axios).toHaveBeenCalled();
             done();
         }, 50);
     }, 50);

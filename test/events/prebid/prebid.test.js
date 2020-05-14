@@ -7,7 +7,7 @@ import {NoSessionError} from "../../../src/core/errors/nosession_error";
 jest.mock('axios');
 
 beforeEach(() => {
-    Axios.post.mockImplementationOnce(() => Promise.resolve());
+    Axios.mockImplementationOnce(() => Promise.resolve());
 
     let u = new User();
     u.gdpr = new Gdpr();
@@ -76,7 +76,7 @@ test("it should handle, and send, a valid auction event", async () => {
 
     await pb.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should handle, and send, a valid auction event without adUnitSizes", async () => {
@@ -115,7 +115,7 @@ test("it should handle, and send, a valid auction event without adUnitSizes", as
 
     await pb.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should handle, and send, a valid auction event with GDPR value != 3 and User GDPR value != 3", async () => {
@@ -168,7 +168,7 @@ test("it should handle, and send, a valid auction event with GDPR value != 3 and
 
     await pb.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should handle, and send, a valid auction event with GDPR value == 3 and User GDPR value != 3", async () => {
@@ -221,7 +221,7 @@ test("it should handle, and send, a valid auction event with GDPR value == 3 and
 
     await pb.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should handle, and send, a valid auction event with GDPR value == 3 and User GDPR value == 3", async () => {
@@ -274,7 +274,7 @@ test("it should handle, and send, a valid auction event with GDPR value == 3 and
 
     await pb.handleAuctionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("should throw an error when attempting to handle auction event without open session", async () => {
@@ -355,7 +355,7 @@ test("it should handle, and send, a valid impression event", async () => {
 
     await pb.handleImpressionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("should throw an error when attempting to handle impression event without open session", async () => {
@@ -449,7 +449,7 @@ test("it should handle, and send, a valid impression event with GDPR value != 3 
 
     await pb.handleImpressionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should handle, and send, a valid impression event with GDPR value == 3 and User GDPR value != 3", async () => {
@@ -504,7 +504,7 @@ test("it should handle, and send, a valid impression event with GDPR value == 3 
 
     await pb.handleImpressionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should handle, and send, a valid impression event with GDPR value == 3 and User GDPR value == 3", async () => {
@@ -559,7 +559,7 @@ test("it should handle, and send, a valid impression event with GDPR value == 3 
 
     await pb.handleImpressionEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 //handleBidAfterTimeoutEvent
@@ -604,7 +604,7 @@ test("it should handle, and send, a valid bid after timeout event", async () => 
 
     await pb.handleBidAfterTimeoutEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("should throw an error when attempting to handle bid after timeout event without open session", async () => {
@@ -702,7 +702,7 @@ test("it should handle, and send, a valid bid after timeout event with GDPR valu
 
     await pb.handleBidAfterTimeoutEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should handle, and send, a valid bid after timeout event with GDPR value == 3 and User GDPR value != 3", async () => {
@@ -759,7 +759,7 @@ test("it should handle, and send, a valid bid after timeout event with GDPR valu
 
     await pb.handleBidAfterTimeoutEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });
 
 test("it should handle, and send, a valid bid after timeout event with GDPR value == 3 and User GDPR value == 3", async () => {
@@ -816,5 +816,5 @@ test("it should handle, and send, a valid bid after timeout event with GDPR valu
 
     await pb.handleBidAfterTimeoutEvent(ev);
 
-    expect(Axios.post).toHaveBeenCalled();
+    expect(Axios).toHaveBeenCalled();
 });

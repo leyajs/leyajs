@@ -2,7 +2,7 @@
 
 import {Session, User} from "./model/index";
 import {LOGGER, Utils} from "./utils"
-import uuid from "uuid/v4";
+import { v4 as uuid } from 'uuid';
 import {SessionOpenError} from "./errors/sessionopen_error";
 import {NoSessionError} from "./errors/nosession_error";
 
