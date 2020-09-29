@@ -166,7 +166,8 @@ export default class Prebid {
                 bidder_status: b.status,
                 bidder_cpm: b.cpm,
                 bidder_start: b.start,
-                bidder_finish: b.finish
+                bidder_finish: b.finish,
+                bidder_source: b.source
             });
         });
 
@@ -204,7 +205,8 @@ export default class Prebid {
                 bidder_status: b.status,
                 bidder_cpm: b.cpm,
                 bidder_start: b.start,
-                bidder_finish: b.finish
+                bidder_finish: b.finish,
+                bidder_source: b.source
             });
         });
 
@@ -246,7 +248,8 @@ export default class Prebid {
                         bidder_status: b.status,
                         bidder_cpm: b.cpm,
                         bidder_start: b.start,
-                        bidder_finish: b.finish
+                        bidder_finish: b.finish,
+                        bidder_source: b.source
                     });
                 });
             } else {
@@ -280,7 +283,8 @@ export default class Prebid {
                             bidder_status: b.status,
                             bidder_cpm: b.cpm,
                             bidder_start: b.start,
-                            bidder_finish: b.finish
+                            bidder_finish: b.finish,
+                            bidder_source: b.source
                         });
                     });
                 });
