@@ -21,7 +21,8 @@ test("it should map Prebid Impression event to Impression model", async () => {
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1235
+                    finish: 1235,
+                    source: "s2s"
                 }
             }
         }
@@ -47,6 +48,7 @@ test("it should map Prebid Impression event to Impression model", async () => {
     expectedBidder.cpm = 0.01;
     expectedBidder.start = 1234;
     expectedBidder.finish = 1235;
+    expectedBidder.source = "s2s";
 
     expected.bidders = [expectedBidder];
 
@@ -79,7 +81,8 @@ test("it should map Prebid Impression event to Impression model", async () => {
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1235
+                    finish: 1235,
+                    source: "s2s"
                 }
             }
         }
@@ -106,6 +109,7 @@ test("it should map Prebid Impression event to Impression model", async () => {
     expectedBidder.cpm = 0.01;
     expectedBidder.start = 1234;
     expectedBidder.finish = 1235;
+    expectedBidder.source = "s2s";
 
     expected.bidders = [expectedBidder];
 
@@ -140,7 +144,8 @@ test("it should map Prebid BidAfterTimeout event to BidAfterTimeout model", asyn
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1237
+                    finish: 1237,
+                    source: "s2s"
                 }
             }
         }
@@ -169,6 +174,7 @@ test("it should map Prebid BidAfterTimeout event to BidAfterTimeout model", asyn
     expectedBidder.cpm = 0.01;
     expectedBidder.start = 1234;
     expectedBidder.finish = 1237;
+    expectedBidder.source = "s2s";
 
     expected.bidders = [expectedBidder];
 
@@ -198,7 +204,8 @@ test("it should map Prebid BidAfterTimeout event to BidAfterTimeout model", asyn
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1237
+                    finish: 1237,
+                    source: "s2s"
                 }
             }
         }
@@ -226,6 +233,7 @@ test("it should map Prebid BidAfterTimeout event to BidAfterTimeout model", asyn
     expectedBidder.cpm = 0.01;
     expectedBidder.start = 1234;
     expectedBidder.finish = 1237;
+    expectedBidder.source = "s2s";
 
     expected.bidders = [expectedBidder];
 
@@ -256,7 +264,8 @@ test("it should map Prebid Auction event to Auction model", async () => {
                         status: "bid",
                         cpm: 0.01,
                         start: 1234,
-                        finish: 1235
+                        finish: 1235,
+                        source: "s2s"
                     }
                 }
             }
@@ -286,6 +295,7 @@ test("it should map Prebid Auction event to Auction model", async () => {
     expectedBidder.cpm = 0.01;
     expectedBidder.start = 1234;
     expectedBidder.finish = 1235;
+    expectedBidder.source = "s2s";
 
     expectedAdUnit.bidders = [expectedBidder];
     expected.adunits = [expectedAdUnit];
@@ -314,7 +324,8 @@ test("it should map Prebid Auction event to Auction model", async () => {
                         status: "bid",
                         cpm: 0.01,
                         start: 1234,
-                        finish: 1235
+                        finish: 1235,
+                        source: "s2s"
                     }
                 }
             }
@@ -343,6 +354,7 @@ test("it should map Prebid Auction event to Auction model", async () => {
     expectedBidder.cpm = 0.01;
     expectedBidder.start = 1234;
     expectedBidder.finish = 1235;
+    expectedBidder.source = "s2s";
 
     expectedAdUnit.bidders = [expectedBidder];
     expected.adunits = [expectedAdUnit];
@@ -629,6 +641,8 @@ test("bidder getter and setters", async () => {
     const spyFinishSetter = jest.spyOn(b, 'finish', 'set');
     const spyStatusGetter = jest.spyOn(b, 'status', 'get');
     const spyStatusSetter = jest.spyOn(b, 'status', 'set');
+    const spySourceGetter = jest.spyOn(b, 'source', 'get');
+    const spySourceSetter = jest.spyOn(b, 'source', 'set');
 
     b.id = "bidder";
     b.bat = 0;
@@ -636,6 +650,7 @@ test("bidder getter and setters", async () => {
     b.cpm = 0.01;
     b.start = 1234;
     b.finish = 1235;
+    b.source = "s2s";
 
     expect(b.id).toEqual('bidder');
     expect(spyIdGetter).toHaveBeenCalled();
@@ -660,6 +675,10 @@ test("bidder getter and setters", async () => {
     expect(b.cpm).toEqual(0.01);
     expect(spyCpmGetter).toHaveBeenCalled();
     expect(spyCpmSetter).toHaveBeenCalled();
+
+    expect(b.source).toEqual("s2s");
+    expect(spySourceGetter).toHaveBeenCalled();
+    expect(spySourceSetter).toHaveBeenCalled();
 
 });
 

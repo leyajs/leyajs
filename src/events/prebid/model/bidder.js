@@ -6,6 +6,7 @@ export class Bidder {
     _cpm = null;
     _start = null;
     _finish = null;
+    _source = null;
 
 
     get id() {
@@ -56,6 +57,14 @@ export class Bidder {
         this._finish = value;
     }
 
+    get source() {
+        return this._source;
+    }
+
+    set source(value) {
+        this._source = value;
+    }
+
     static from(ade) {
         let b = new Bidder();
 
@@ -65,6 +74,7 @@ export class Bidder {
         b.cpm = ade.cpm;
         b.start = ade.start;
         b.finish = ade.finish;
+        b.source = ade.source;
 
         return b;
     }

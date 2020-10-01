@@ -67,7 +67,8 @@ test("it should handle, and send, a valid auction event", async () => {
                         status: "bid",
                         cpm: 0.01,
                         start: 1234,
-                        finish: 1235
+                        finish: 1235,
+                        source: "s2s"
                     }
                 }
             }
@@ -106,7 +107,8 @@ test("it should handle, and send, a valid auction event without adUnitSizes", as
                         status: "bid",
                         cpm: 0.01,
                         start: 1234,
-                        finish: 1235
+                        finish: 1235,
+                        source: "s2s"
                     }
                 }
             }
@@ -159,7 +161,8 @@ test("it should handle, and send, a valid auction event with GDPR value != 3 and
                         status: "bid",
                         cpm: 0.01,
                         start: 1234,
-                        finish: 1235
+                        finish: 1235,
+                        source: "s2s"
                     }
                 }
             }
@@ -212,7 +215,8 @@ test("it should handle, and send, a valid auction event with GDPR value == 3 and
                         status: "bid",
                         cpm: 0.01,
                         start: 1234,
-                        finish: 1235
+                        finish: 1235,
+                        source: "s2s"
                     }
                 }
             }
@@ -265,7 +269,8 @@ test("it should handle, and send, a valid auction event with GDPR value == 3 and
                         status: "bid",
                         cpm: 0.01,
                         start: 1234,
-                        finish: 1235
+                        finish: 1235,
+                        source: "s2s"
                     }
                 }
             }
@@ -305,7 +310,8 @@ test("should throw an error when attempting to handle auction event without open
                         status: "bid",
                         cpm: 0.01,
                         start: 1234,
-                        finish: 1235
+                        finish: 1235,
+                        source: "s2s"
                     }
                 }
             }
@@ -347,7 +353,8 @@ test("it should handle, and send, a valid impression event", async () => {
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1235
+                    finish: 1235,
+                    source: "s2s"
                 }
             }
         }
@@ -388,7 +395,8 @@ test("should throw an error when attempting to handle impression event without o
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1235
+                    finish: 1235,
+                    source: "s2s"
                 }
             }
         }
@@ -441,7 +449,8 @@ test("it should handle, and send, a valid impression event with GDPR value != 3 
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1235
+                    finish: 1235,
+                    source: "s2s"
                 }
             }
         }
@@ -496,7 +505,8 @@ test("it should handle, and send, a valid impression event with GDPR value == 3 
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1235
+                    finish: 1235,
+                    source: "s2s"
                 }
             }
         }
@@ -551,7 +561,8 @@ test("it should handle, and send, a valid impression event with GDPR value == 3 
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1235
+                    finish: 1235,
+                    source: "s2s"
                 }
             }
         }
@@ -596,7 +607,8 @@ test("it should handle, and send, a valid bid after timeout event", async () => 
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1237
+                    finish: 1237,
+                    source: "s2s"
                 }
             }
         }
@@ -639,7 +651,8 @@ test("should throw an error when attempting to handle bid after timeout event wi
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1237
+                    finish: 1237,
+                    source: "s2s"
                 }
             }
         }
@@ -694,7 +707,8 @@ test("it should handle, and send, a valid bid after timeout event with GDPR valu
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1237
+                    finish: 1237,
+                    source: "s2s"
                 }
             }
         }
@@ -751,7 +765,8 @@ test("it should handle, and send, a valid bid after timeout event with GDPR valu
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1237
+                    finish: 1237,
+                    source: "s2s"
                 }
             }
         }
@@ -808,7 +823,8 @@ test("it should handle, and send, a valid bid after timeout event with GDPR valu
                     status: "bid",
                     cpm: 0.01,
                     start: 1234,
-                    finish: 1237
+                    finish: 1237,
+                    source: "s2s"
                 }
             }
         }
