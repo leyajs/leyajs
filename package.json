@@ -46,7 +46,7 @@
     "html-webpack-template": "^6.2.0",
     "jest": "^25.5.1",
     "lodash-webpack-plugin": "^0.11.5",
-    "standard": "^14.3.3",
+    "standard": "^15.0.0",
     "unminified-webpack-plugin": "^2.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
