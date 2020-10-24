@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.9.6",
-    "axios": "0.19.2",
+    "axios": "0.21.0",
     "uuid": "8.0.0",
     "retry-axios": "2.1.3"
   }
