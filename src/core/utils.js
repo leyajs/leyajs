@@ -3,7 +3,7 @@ import getLogger from "webpack-log"
 export class Utils {
 
     static getDeviceType() {
-        if ((/bot|googlebot|crawler|spider|robot|crawling|google|baidu|bing|msn|duckduckbot|teoma|slurp|yandex/i.test(navigator.userAgent.toLowerCase()))) {
+        if ((/bot|spider|crawl|google|baidu|bing|msn|teoma|slurp|yandex/i.test(navigator.userAgent.toLowerCase()))) {
             return 'bot';
         }
 
